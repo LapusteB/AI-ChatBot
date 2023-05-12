@@ -10,6 +10,17 @@
       "StackName": "amplify-chatbot-dev-104924",
       "StackId": "arn:aws:cloudformation:us-east-1:849296060380:stack/amplify-chatbot-dev-104924/f47484c0-f0e4-11ed-844e-0a28ba9c06bb",
       "AmplifyAppId": "d3e9q7datw57z2"
+    },
+    "categories": {
+      "function": {
+        "chatbot86173404": {
+          "deploymentBucketName": "amplify-chatbot-dev-104924-deployment",
+          "s3Key": "amplify-builds/chatbot86173404-68614f374c5361423559-build.zip"
+        }
+      },
+      "api": {
+        "api6b706c74": {}
+      }
     }
   }
 }

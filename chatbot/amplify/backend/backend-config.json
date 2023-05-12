@@ -1,1 +1,43 @@
-{}
+{
+  "api": {
+    "api6b706c74": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "chatbot86173404"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
+  "function": {
+    "chatbot86173404": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_chatbot86173404_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "chatbot86173404"
+        }
+      ]
+    },
+    "AMPLIFY_function_chatbot86173404_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "chatbot86173404"
+        }
+      ]
+    }
+  }
+}
