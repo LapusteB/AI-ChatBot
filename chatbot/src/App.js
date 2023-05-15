@@ -9,14 +9,46 @@ import {TextField, Button} from '@mui/material'
 const myAPI = "api6b706c74"
 const path = '/prompt'
 
+Amplify.configure({
+  API: {
+    endpoints: [
+      {
+        name: 'myAPI',
+        endpoint: '<YOUR_API_ENDPOINT>', // Replace with your API endpoint URL
+      },
+    ],
+  },
+});
 
 
 function App() {
   const [prompt, setPrompt] = useState('');
-  const handleSubmit = (event) => {
+  
+  const handleSubmit = async (event) => {
     event.preventDefault();
     console.log('Handling form submission');
     // Perform submit logic here
+    ///////////////////////////////////////////////////////////////////
+    try {
+      const apiResponse = await API.post('myAPI', '/prompt', {
+        body: {
+          prompt,
+        },
+      });
+
+      const generatedText = apiResponse.generatedText;
+      console.log('Generated text:', generatedText);
+
+      // Perform any additional logic with the generated text here
+
+      // Reset the input field
+      setPrompt('');
+    } catch (error) {
+      console.error('API error:', error);
+    }
+    ////////////////////////////////////////////////////////////////////
+
+
     console.log('Form submitted:', prompt);
     // Reset the input field
     setPrompt('');
