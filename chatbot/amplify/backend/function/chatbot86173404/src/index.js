@@ -1,20 +1,29 @@
+import { Configuration, OpenAIApi } from "openai";
+
+const configuration = new Configuration({
+    organization: "org-yjEWmQsSgoZQFZ4ZT90yioh1",
+    apiKey: "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",
+});
 
 
+const openai = new OpenAIApi(configuration);
 
-const axios = require('axios');
+//const axios = require('axios');
+
 require('dotenv').config()
-const openaiAPIKey = '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';
+const openaiAPIKey = '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';// Replace with your OpenAI API key
 
 exports.handler = async (event) => {
     try {
         const { prompt } = JSON.parse(event.body);
-        const openaiAPIUrl = 'https://api.openai.com/v1/engines/davinci-codex/completions';
-        const openaiAPIKey = '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'; // Replace with your OpenAI API key
+        const openaiAPIUrl = 'https://api.openai.com/v1/chat/completions';
+         
 
-        const response = await axios.post(openaiAPIUrl, {
-            prompt,
-            max_tokens: 100,
-            temperature: 0.7,
+        const response = await openai.createCompletion({
+            model: "text-davinci-003",
+            prompt: prompt,
+            max_tokens: 2048,
+            temperature: 1,
             n: 1
         }, {
             headers: {
