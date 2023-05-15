@@ -17,12 +17,14 @@ exports.handler = async (event) => {
 };
 
 const axios = require('axios');
+require('dotenv').config()
+const openaiAPIKey = process.env.OPENAI_API_KEY;
 
 exports.handler = async (event) => {
     try {
         const { prompt } = JSON.parse(event.body);
         const openaiAPIUrl = 'https://api.openai.com/v1/engines/davinci-codex/completions';
-        const openaiAPIKey = 'YOUR_OPENAI_API_KEY'; // Replace with your OpenAI API key
+        const openaiAPIKey = openaiAPIKey; // Replace with your OpenAI API key
 
         const response = await axios.post(openaiAPIUrl, {
             prompt,

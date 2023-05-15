@@ -13,8 +13,8 @@ Amplify.configure({
   API: {
     endpoints: [
       {
-        name: 'myAPI',
-        endpoint: '<YOUR_API_ENDPOINT>', // Replace with your API endpoint URL
+        name: 'api6b706c74',
+        endpoint: 'https://dg4krhi987.execute-api.us-east-1.amazonaws.com/dev', // Replace with your API endpoint URL
       },
     ],
   },
@@ -30,13 +30,13 @@ function App() {
     // Perform submit logic here
     ///////////////////////////////////////////////////////////////////
     try {
-      const apiResponse = await API.post('myAPI', '/prompt', {
+      const apiResponse = await API.post('api6b706c74', '/prompt', {
         body: {
           prompt,
         },
       });
 
-      const generatedText = apiResponse.generatedText;
+      const generatedText = apiResponse.data.generatedText;
       console.log('Generated text:', generatedText);
 
       // Perform any additional logic with the generated text here
