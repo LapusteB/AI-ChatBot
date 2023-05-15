@@ -1,30 +1,15 @@
 
 
-/**
- * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
- */
-exports.handler = async (event) => {
-    console.log(`EVENT: ${JSON.stringify(event)}`);
-    return {
-        statusCode: 200,
-    //  Uncomment below to enable CORS requests
-      headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Headers": "*"
-      },
-        body: JSON.stringify('Hello from Lambda!'),
-    };
-};
 
 const axios = require('axios');
 require('dotenv').config()
-const openaiAPIKey = process.env.OPENAI_API_KEY;
+const openaiAPIKey = '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';
 
 exports.handler = async (event) => {
     try {
         const { prompt } = JSON.parse(event.body);
         const openaiAPIUrl = 'https://api.openai.com/v1/engines/davinci-codex/completions';
-        const openaiAPIKey = openaiAPIKey; // Replace with your OpenAI API key
+        const openaiAPIKey = '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'; // Replace with your OpenAI API key
 
         const response = await axios.post(openaiAPIUrl, {
             prompt,

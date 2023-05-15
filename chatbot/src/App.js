@@ -14,7 +14,7 @@ Amplify.configure({
     endpoints: [
       {
         name: 'api6b706c74',
-        endpoint: 'https://dg4krhi987.execute-api.us-east-1.amazonaws.com/dev', // Replace with your API endpoint URL
+        endpoint: 'https://dg4krhi987.execute-api.us-east-1.amazonaws.com/dev/prompt', // Replace with your API endpoint URL
       },
     ],
   },
