@@ -20,10 +20,10 @@ exports.handler = async (event) => {
          
 
         const response = await openai.createCompletion({
-            model: "text-davinci-003",
+            model: "gpt-3.5-turbo",
             prompt: prompt,
             max_tokens: 2048,
-            temperature: 1,
+            temperature: 0.7,
             n: 1
         }, {
             headers: {
@@ -45,7 +45,7 @@ exports.handler = async (event) => {
             })
         };
     } catch (error) {
-        console.error('Error:', error.response.data);
+        console.error('Endpoint Error:', error.response.data);
         return {
             statusCode: 500,
             body: JSON.stringify('Internal Server Error')

@@ -14,7 +14,7 @@ Amplify.configure({
     endpoints: [
       {
         name: 'api6b706c74',
-        endpoint: 'https://dg4krhi987.execute-api.us-east-1.amazonaws.com/dev/prompt', // Replace with your API endpoint URL
+        endpoint: 'https://dg4krhi987.execute-api.us-east-1.amazonaws.com/dev', // Replace with your API endpoint URL
       },
     ],
   },
@@ -68,7 +68,7 @@ function App() {
         <img src={logo2} className="App-logo" alt="logo" />
         </div>
         <p>
-          Prompt AI Using GPT-3.1
+          Prompt AI Using GPT-4.0
           
         </p>
         <form onSubmit={handleSubmit}>
