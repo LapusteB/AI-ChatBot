@@ -4,10 +4,9 @@ import logo2 from './OA.png'
 import React, { useState } from 'react';
 import { Amplify } from 'aws-amplify';
 import { API } from 'aws-amplify';
-import {TextField, Button} from '@mui/material'
+import {TextField, Button, Box, Slider} from '@mui/material'
+import GenerateCard from "./components/GenerateCard";
 
-const myAPI = "api6b706c74"
-const path = '/prompt'
 
 Amplify.configure({
   API: {
@@ -23,7 +22,8 @@ Amplify.configure({
 
 function App() {
   const [prompt, setPrompt] = useState('');
-  
+  const [generatedCard, setGeneratedCard] = useState('');
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log('Handling form submission');
@@ -40,7 +40,7 @@ function App() {
       console.log('Generated text:', generatedText);
 
       // Perform any additional logic with the generated text here
-
+      setGeneratedCard(generatedText);
       // Reset the input field
       setPrompt('');
     } catch (error) {
@@ -71,22 +71,48 @@ function App() {
           Prompt AI Using GPT-4.0
           
         </p>
+        
+
         <form onSubmit={handleSubmit}>
+        <Box  alignItems="center" marginLeft={2}>
         
         <TextField
         label="Prompt"
-        color="secondary"
+        color="primary"
         variant='outlined'
         size='large'
         fullWidth
         value={prompt}
         onChange={handlePromptChange}
+        InputProps={{
+          style: {
+            color: 'white', // Set the desired text color here
+          },
+        }}
         />
+        
+      
+        
         <Button
         type='submit'
-        variant="contained">Submit
+        variant="contained"
+        >Submit
         </Button>
+        <body>Temerature rating: </body>
         
+        <Slider
+        aria-label="Temperature"
+        defaultValue={0.7}
+        
+        valueLabelDisplay="auto"
+        step={0.1}
+        marks
+        min={0.0}
+        max={1.0}
+        />
+
+        </Box>
+        <GenerateCard text={generatedCard} prompt={prompt}/>
        
        </form>
       </header>

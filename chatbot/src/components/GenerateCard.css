@@ -1,0 +1,8 @@
+.generate-card {
+    /* Add your custom CSS styles here */
+    background-color: rgb(77, 166, 196);
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Add any other styles you desire */
+  }
