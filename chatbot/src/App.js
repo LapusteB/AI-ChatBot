@@ -36,7 +36,7 @@ function App() {
         },
       });
 
-      const generatedText = apiResponse.data.generatedText;
+      const generatedText = apiResponse.generatedText;
       console.log('Generated text:', generatedText);
 
       // Perform any additional logic with the generated text here
