@@ -6,7 +6,6 @@ const configuration = new Configuration({
 });
 
 const openai = new OpenAIApi(configuration);
-const axios = require('axios');
 
 require('dotenv').config()
 const openaiAPIKey = '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';// Replace with your OpenAI API key
@@ -14,10 +13,10 @@ const openaiAPIKey = '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';// Re
 exports.handler = async (event) => {
   try {
     const { prompt } = JSON.parse(event.body);
-    const openaiAPIUrl = 'https://api.openai.com/v1/chat/completions';
+    //const openaiAPIUrl = 'https://api.openai.com/v1/chat/completions';
 
     const response = await openai.createCompletion({
-      model: "gpt-3.5-turbo",
+      model: "text-davinci-003",
       prompt: prompt,
       max_tokens: 2048,
       temperature: 0.7,
