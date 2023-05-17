@@ -1,14 +1,15 @@
 const { Configuration, OpenAIApi } = require("openai");
+require('dotenv').config()
 
 const configuration = new Configuration({
   organization: "org-yjEWmQsSgoZQFZ4ZT90yioh1",
-  apiKey: "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",
+  apiKey: process.env.MY_API_KEY,
 });
 
 const openai = new OpenAIApi(configuration);
 
-require('dotenv').config()
-const openaiAPIKey = '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';// Replace with your OpenAI API key
+
+const openaiAPIKey = process.env.MY_API_KEY;// Replace with your OpenAI API key
 
 exports.handler = async (event) => {
   try {
