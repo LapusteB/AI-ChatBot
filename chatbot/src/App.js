@@ -1,14 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
-import logo2 from './OA.png'
+import logo2 from './OA.png';
 import React, { useState } from 'react';
 import { Amplify } from 'aws-amplify';
 import { API } from 'aws-amplify';
-import {TextField, Button, Box, Slider} from '@mui/material'
+import { TextField, Button, Box } from '@mui/material';
 import GenerateCard from "./components/GenerateCard";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 
 Amplify.configure({
   API: {
@@ -21,16 +20,13 @@ Amplify.configure({
   },
 });
 
-
 function App() {
   const [prompt, setPrompt] = useState('');
-  const [generatedCard, setGeneratedCard] = useState('');
+  const [generatedCards, setGeneratedCards] = useState([]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log('Handling form submission');
-    // Perform submit logic here
-    ///////////////////////////////////////////////////////////////////
     try {
       const apiResponse = await API.post('api6b706c74', '/prompt', {
         body: {
@@ -38,86 +34,70 @@ function App() {
         },
       });
 
-      const generatedText = apiResponse.generatedText;
-      console.log('Generated text:', generatedText);
+      const generatedText = apiResponse.generatedText.content;
+      const formattedText = generatedText.replace(/\n/g, '\n\n').trim();
+      console.log('Generated text:', formattedText);
 
-      // Perform any additional logic with the generated text here
-      setGeneratedCard(generatedText);
+      // Create a new card object
+      const newCard = {
+        prompt,
+        text: formattedText,
+      };
+
+      // Add the new card to the existing array of cards
+      setGeneratedCards((prevCards) => [...prevCards, newCard]);
+
       // Reset the input field
       setPrompt('');
     } catch (error) {
       console.error('API error:', error);
-      toast.error('An error occured. Please try again later')
+      toast.error('An error occurred. Please try again later');
     }
-    ////////////////////////////////////////////////////////////////////
-
-
-    console.log('Form submitted:', prompt);
-    // Reset the input field
-    setPrompt('');
   };
 
   const handlePromptChange = (event) => {
     setPrompt(event.target.value);
   };
 
-
-
   return (
     <div className="App">
       <header className="App-header">
-      <div className="image-wrapper">
-        <img src={logo} className="App-logo" alt="logo" />
-        <img src={logo2} className="App-logo" alt="logo" />
+        <div className="image-wrapper">
+          <img src={logo} className="App-logo" alt="logo" />
+          <img src={logo2} className="App-logo" alt="logo" />
         </div>
-        <p>
-          Prompt AI Using GPT-3.5 Turbo
-          
-        </p>
-        
+        <p>Prompt AI Using GPT-3.5 Turbo</p>
 
         <form onSubmit={handleSubmit}>
-        <Box  alignItems="center" marginLeft={2}>
-        
-        <TextField
-        label="Prompt"
-        color="primary"
-        variant='outlined'
-        size='large'
-        fullWidth
-        value={prompt}
-        onChange={handlePromptChange}
-        InputProps={{
-          style: {
-            color: 'white', // Set the desired text color here
-          },
-        }}
-        />
-        
-      
-        
-        <Button
-        type='submit'
-        variant="contained"
-        >Submit
-        </Button>
-        <body>Temerature rating: </body>
-        
-        <Slider
-        aria-label="Temperature"
-        defaultValue={0.7}
-        
-        valueLabelDisplay="auto"
-        step={0.1}
-        marks
-        min={0.0}
-        max={1.0}
-        />
+          <Box alignItems="center" marginLeft={2}>
+            <TextField
+              label="Prompt"
+              color="primary"
+              variant="outlined"
+              size="large"
+              fullWidth
+              value={prompt}
+              onChange={handlePromptChange}
+              InputProps={{
+                style: {
+                  color: 'white', // Set the desired text color here
+                  marginBottom: '10px', // Add margin-bottom for spacing
+                },
+              }}
+            />
 
-        </Box>
-        <GenerateCard text={generatedCard} prompt={prompt}/>
-       
-       </form>
+            <Button type="submit" variant="contained">
+              Submit
+            </Button>
+          </Box>
+        </form>
+
+        {generatedCards.map((card, index) => (
+          <div key={index}>
+            <p>{card.prompt}</p>
+            <GenerateCard text={card.text} />
+          </div>
+        ))}
       </header>
       <ToastContainer />
     </div>
