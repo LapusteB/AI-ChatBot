@@ -34,7 +34,7 @@ exports.handler = async (event) => {
       }
     });
 
-    const generatedText = response.data.choices[0].text.trim();
+    const generatedText = response.choices[0].message.content.trim();
 
     return {
       statusCode: 200,
@@ -47,7 +47,7 @@ exports.handler = async (event) => {
       })
     };
   } catch (error) {
-    console.error('Endpoint Error:', error.response.data);
+    console.error('Endpoint Error:', error);
     return {
       statusCode: 500,
       body: JSON.stringify('Internal Server Error')

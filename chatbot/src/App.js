@@ -6,6 +6,8 @@ import { Amplify } from 'aws-amplify';
 import { API } from 'aws-amplify';
 import {TextField, Button, Box, Slider} from '@mui/material'
 import GenerateCard from "./components/GenerateCard";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 Amplify.configure({
@@ -45,6 +47,7 @@ function App() {
       setPrompt('');
     } catch (error) {
       console.error('API error:', error);
+      toast.error('An error occured. Please try again later')
     }
     ////////////////////////////////////////////////////////////////////
 
@@ -116,6 +119,7 @@ function App() {
        
        </form>
       </header>
+      <ToastContainer />
     </div>
   );
 }
