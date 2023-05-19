@@ -16,9 +16,14 @@ exports.handler = async (event) => {
     const { prompt } = JSON.parse(event.body);
     //const openaiAPIUrl = 'https://api.openai.com/v1/chat/completions';
 
-    const response = await openai.createCompletion({
-      model: "text-davinci-003",
-      prompt: prompt,
+    const response = await openai.createChatCompletion({
+      model: "gpt-3.5-turbo-0301",
+      messages: [
+        {
+          role: 'system',
+          content: prompt
+        }
+      ],
       max_tokens: 2048,
       temperature: 0.7,
       n: 1

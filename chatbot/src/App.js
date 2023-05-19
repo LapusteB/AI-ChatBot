@@ -68,7 +68,7 @@ function App() {
         <img src={logo2} className="App-logo" alt="logo" />
         </div>
         <p>
-          Prompt AI Using GPT-4.0
+          Prompt AI Using GPT-3.5 Turbo
           
         </p>
         
