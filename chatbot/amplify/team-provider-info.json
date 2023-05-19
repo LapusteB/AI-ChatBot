@@ -15,7 +15,7 @@
       "function": {
         "chatbot86173404": {
           "deploymentBucketName": "amplify-chatbot-dev-104924-deployment",
-          "s3Key": "amplify-builds/chatbot86173404-31304453723269547775-build.zip"
+          "s3Key": "amplify-builds/chatbot86173404-494b65435045304e4667-build.zip"
         }
       },
       "api": {

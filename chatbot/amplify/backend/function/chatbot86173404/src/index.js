@@ -34,7 +34,7 @@ exports.handler = async (event) => {
       }
     });
 
-    const generatedText = response.choices[0].message.content.trim();
+    const generatedText = response.data.choices[0].message;
 
     return {
       statusCode: 200,
@@ -48,6 +48,7 @@ exports.handler = async (event) => {
     };
   } catch (error) {
     console.error('Endpoint Error:', error);
+    console.log('This is the key: ',process.env.MY_API_KEY);
     return {
       statusCode: 500,
       body: JSON.stringify('Internal Server Error')
