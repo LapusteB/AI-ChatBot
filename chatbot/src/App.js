@@ -7,6 +7,7 @@ import { API } from 'aws-amplify';
 import { TextField, Button, Box } from '@mui/material';
 import GenerateCard from "./components/GenerateCard";
 import { ToastContainer, toast } from 'react-toastify';
+import ClipLoader from "react-spinners/ClipLoader";
 import 'react-toastify/dist/ReactToastify.css';
 
 Amplify.configure({
@@ -23,6 +24,7 @@ Amplify.configure({
 function App() {
   const [prompt, setPrompt] = useState('');
   const [generatedCards, setGeneratedCards] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -48,6 +50,7 @@ function App() {
       setGeneratedCards((prevCards) => [...prevCards, newCard]);
 
       // Reset the input field
+      setLoading(!loading);
       setPrompt('');
     } catch (error) {
       console.error('API error:', error);
@@ -85,10 +88,23 @@ function App() {
                 },
               }}
             />
+             {/*loading Cog Wheel */}
+             <div className='loading-spiner'>
+              <ClipLoader
+                color='#fffffff'
+                loading={loading}
+                size={50}
+              />
+            </div>
 
-            <Button type="submit" variant="contained">
+            <Button
+            type="submit"
+             variant="contained"
+             onClick={() => setLoading(!loading)}
+             >
               Submit
             </Button>
+            
           </Box>
         </form>
 
