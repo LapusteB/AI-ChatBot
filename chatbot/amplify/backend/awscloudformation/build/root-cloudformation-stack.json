@@ -158,7 +158,7 @@
         "TemplateURL": "https://s3.amazonaws.com/amplify-chatbot-dev-104924-deployment/amplify-cfn-templates/function/chatbot86173404-cloudformation-template.json",
         "Parameters": {
           "deploymentBucketName": "amplify-chatbot-dev-104924-deployment",
-          "s3Key": "amplify-builds/chatbot86173404-694961717a2f79676e65-build.zip",
+          "s3Key": "amplify-builds/chatbot86173404-73777755714c7151386f-build.zip",
           "env": "dev"
         }
       }

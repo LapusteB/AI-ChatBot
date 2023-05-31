@@ -14,37 +14,70 @@ const openai = new OpenAIApi(configuration);
 exports.handler = async (event) => {
   try {
     const { prompt } = JSON.parse(event.body);
-    //const openaiAPIUrl = 'https://api.openai.com/v1/chat/completions';
+    const { action } = JSON.parse(event.body); // New line
 
-    const response = await openai.createChatCompletion({
-      model: "gpt-3.5-turbo-0301",
-      messages: [
-        {
-          role: 'system',
-          content: prompt
-        }
-      ],
-      max_tokens: 2048,
-      temperature: 0.7,
-      n: 1
+    if (action === "chat-completion") { // New condition
+      const response = await openai.createChatCompletion({
+        model: "gpt-3.5-turbo-0301",
+        messages: [
+          {
+            role: 'system',
+            content: prompt
+          }
+        ],
+        max_tokens: 2048,
+        temperature: 0.7,
+        n: 1
+      });
+
+      const generatedText = response.data.choices[0].message;
+
+      return {
+        statusCode: 200,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Headers': '*'
+        },
+        body: JSON.stringify({
+          generatedText
+        })
+      };
+    } 
     
-    });
+    
+    else if (action === "image-edit") { // New condition
+      
+      // Handle image editing logic
+      const response = await openai.createImage({
+        prompt: prompt,
+        n: 1,
+        size: "512x512",
+      });
+      image_url = response.data.data[0].url;
 
-    const generatedText = response.data.choices[0].message;
+      return {
+        statusCode: 200,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Headers': '*'
+        },
+        body: JSON.stringify({
+          image_url
+        })
+      };
+    }
 
     return {
-      statusCode: 200,
+      statusCode: 400,
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Headers': '*'
       },
-      body: JSON.stringify({
-        generatedText
-      })
+      body: JSON.stringify('Invalid action')
     };
   } catch (error) {
     console.error('Endpoint Error:', error);
-    console.log('This is the key: ',process.env.MY_API_KEY);
+    console.log('This is the key: ', process.env.MY_API_KEY);
     return {
       statusCode: 500,
       body: JSON.stringify('Internal Server Error')
