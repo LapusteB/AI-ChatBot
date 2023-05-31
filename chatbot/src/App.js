@@ -170,21 +170,27 @@ function App() {
                 size={50}
               />
             </div>
-            <img 
-            src={url}
-            style={{ marginTop: '10px' }}
-            alt=''
-            ></img>
-          </Box>
-        </form>
-
-        {generatedCards.map((card, index) => (
+            {generatedCards.map((card, index) => (
           <div key={index}>
             <p>{card.prompt}</p>
             <GenerateCard text={card.text} />
             
           </div>
         ))}
+            <img 
+            src={url}
+            style={{
+            marginTop: '10px',
+            maxWidth: '100%',
+            height: 'auto',
+            display: 'block'
+          }}
+          alt=''
+            />
+          </Box>
+        </form>
+
+        
         
       </header>
       <ToastContainer />
