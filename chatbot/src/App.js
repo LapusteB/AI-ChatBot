@@ -6,6 +6,7 @@ import { Amplify } from 'aws-amplify';
 import { API } from 'aws-amplify';
 import { TextField, Button, Box } from '@mui/material';
 import GenerateCard from "./components/GenerateCard";
+import New from "./new.png";
 
 import { ToastContainer, toast } from 'react-toastify';
 import ClipLoader from "react-spinners/ClipLoader";
@@ -124,16 +125,19 @@ function App() {
           <img src={logo} className="App-logo" alt="logo" />
           <img src={logo2} className="App-logo" alt="logo" />
         </div>
-        <p>GPT-3.5 Turbo or DALL.E</p>
+        <div className="text-container">
+            <img src={New} className="new-image" alt="New" />
+            <p>GPT-4 Turbo or DALL.E</p>
+        </div>
         
         
         <form onSubmit={handleSubmit}>
           <Box alignItems="center" marginLeft={2}>
             <TextField
               label="Prompt"
-              color="primary"
+              color="secondary"
               variant="outlined"
-              size="large"
+              size="small"
               fullWidth
               value={prompt}
               onChange={handlePromptChange}

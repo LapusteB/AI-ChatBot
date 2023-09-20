@@ -18,7 +18,7 @@
 
 
 .App-header {
-  background: linear-gradient(45deg, #0b53ee, #60adbb, #3345e6);
+  background: linear-gradient(45deg, #78e9f3, #8aadff, #78e9f3);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -31,6 +31,21 @@
 .App-link {
   color: #61dafb;
 }
+
+.text-container {
+  position: relative;
+  display: inline-block; /* To ensure the container doesn't take full width */
+}
+
+.new-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  transform: translate(-90%, -0%); /* To move it to the top-left outside the letter G */
+}
+
 
 @keyframes App-logo-spin {
   from {
