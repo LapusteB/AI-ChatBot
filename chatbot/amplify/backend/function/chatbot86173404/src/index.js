@@ -25,9 +25,13 @@ exports.handler = async (event) => {
             content: prompt
           }
         ],
-        max_tokens: 2048,
-        temperature: 0.7,
-        n: 1
+        temperature: 1,
+        top_p: 1,
+        n: 1,
+        stream: false,
+        max_tokens: 250,
+        presence_penalty: 0,
+        frequency_penalty: 0
       });
 
       const generatedText = response.data.choices[0].message;

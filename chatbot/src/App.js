@@ -127,7 +127,7 @@ function App() {
         </div>
         <div className="text-container">
             <img src={New} className="new-image" alt="New" />
-            <p>GPT-4 Turbo or DALL.E</p>
+            <p>GPT-4 or DALL.E</p>
         </div>
         
         
