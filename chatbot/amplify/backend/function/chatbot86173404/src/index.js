@@ -1,5 +1,6 @@
 const { Configuration, OpenAIApi } = require("openai");
 require('dotenv').config()
+const AWS = require('aws-sdk');
 const secretsManager = new AWS.SecretsManager();
 
 async function getSecret(secretName) {
