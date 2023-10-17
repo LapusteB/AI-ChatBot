@@ -1,18 +1,32 @@
 const { Configuration, OpenAIApi } = require("openai");
 require('dotenv').config()
+const secretsManager = new AWS.SecretsManager();
 
-const configuration = new Configuration({
-  organization: "org-yjEWmQsSgoZQFZ4ZT90yioh1",
-  apiKey: "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",
-});
-
-const openai = new OpenAIApi(configuration);
+async function getSecret(secretName) {
+  const data = await secretsManager.getSecretValue({ SecretId: secretName }).promise();
+  if (data.SecretString) {
+    return JSON.parse(data.SecretString);
+  }
+  return null;
+}
 
 
 //const openaiAPIKey = process.env.MY_API_KEY;// Replace with your OpenAI API key
 
 exports.handler = async (event) => {
   try {
+
+    const secrets = await getSecret('OPENAI_KEY'); // Replace with the name you gave your secret
+    const apiKey = secrets.OPENAI_KEY;
+
+    // Initialize OpenAI configuration with the retrieved API key
+    const configuration = new Configuration({
+      organization: "org-yjEWmQsSgoZQFZ4ZT90yioh1",
+      apiKey: apiKey,
+    });
+
+    const openai = new OpenAIApi(configuration);
+
     const { prompt } = JSON.parse(event.body);
     const { action } = JSON.parse(event.body); // New line
 
